@@ -584,6 +584,9 @@ void AmclNode::reconfigureCB(AMCLConfig &config, uint32_t level)
                  alpha_slow_, alpha_fast_,
                  (pf_init_model_fn_t)AmclNode::uniformPoseGenerator,
                  (void *)map_);
+  ROS_ASSERT(pf_);
+  if( pf_ == NULL )
+    return;
   pf_err_ = config.kld_err; 
   pf_z_ = config.kld_z; 
   pf_->pop_err = pf_err_;
@@ -865,6 +868,9 @@ AmclNode::handleMapMessage(const nav_msgs::OccupancyGrid& msg)
   frame_to_laser_.clear();
 
   map_ = convertMap(msg);
+  ROS_ASSERT(map_);
+  if( map_ == NULL )
+    return;
 
 #if NEW_UNIFORM_SAMPLING
   // Index of free space
@@ -879,6 +885,9 @@ AmclNode::handleMapMessage(const nav_msgs::OccupancyGrid& msg)
                  alpha_slow_, alpha_fast_,
                  (pf_init_model_fn_t)AmclNode::uniformPoseGenerator,
                  (void *)map_);
+  ROS_ASSERT(pf_);
+  if( pf_ == NULL )
+    return;
   pf_->pop_err = pf_err_;
   pf_->pop_z = pf_z_;
 
@@ -956,6 +965,8 @@ AmclNode::convertMap( const nav_msgs::OccupancyGrid& map_msg )
 {
   map_t* map = map_alloc();
   ROS_ASSERT(map);
+  if( map == NULL )
+    return map;
 
   map->size_x = map_msg.info.width;
   map->size_y = map_msg.info.height;
@@ -965,6 +976,8 @@ AmclNode::convertMap( const nav_msgs::OccupancyGrid& map_msg )
   // Convert to player format
   map->cells = (map_cell_t*)malloc(sizeof(map_cell_t)*map->size_x*map->size_y);
   ROS_ASSERT(map->cells);
+  if( map->cells == NULL )
+    return map;
   for(int i=0;i<map->size_x * map->size_y;i++)
   {
     if(map_msg.data[i] == 0)
