@@ -40,6 +40,9 @@ map_t *map_alloc(void)
   map_t *map;
 
   map = (map_t*) malloc(sizeof(map_t));
+  assert(map);
+  if (map == NULL)
+    return map;
 
   // Assume we start at (0, 0)
   map->origin_x = 0;
