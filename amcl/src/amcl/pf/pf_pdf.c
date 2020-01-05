@@ -50,6 +50,9 @@ pf_pdf_gaussian_t *pf_pdf_gaussian_alloc(pf_vector_t x, pf_matrix_t cx)
   pf_pdf_gaussian_t *pdf;
 
   pdf = calloc(1, sizeof(pf_pdf_gaussian_t));
+  assert(pdf);
+  if (pdf == NULL)
+    return pdf;
 
   pdf->x = x;
   pdf->cx = cx;
