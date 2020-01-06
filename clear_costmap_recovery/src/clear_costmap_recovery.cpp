@@ -45,7 +45,7 @@ using costmap_2d::NO_INFORMATION;
 
 namespace clear_costmap_recovery {
 ClearCostmapRecovery::ClearCostmapRecovery(): global_costmap_(NULL), local_costmap_(NULL),
-  tf_(NULL), initialized_(false) {}
+  tf_(NULL), initialized_(false), reset_distance_(3.0) {}
 
 void ClearCostmapRecovery::initialize(std::string name, tf2_ros::Buffer* tf,
     costmap_2d::Costmap2DROS* global_costmap, costmap_2d::Costmap2DROS* local_costmap){
