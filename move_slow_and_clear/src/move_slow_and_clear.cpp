@@ -42,8 +42,11 @@ PLUGINLIB_EXPORT_CLASS(move_slow_and_clear::MoveSlowAndClear, nav_core::Recovery
 
 namespace move_slow_and_clear
 {
-  MoveSlowAndClear::MoveSlowAndClear():global_costmap_(NULL), local_costmap_(NULL), 
-                                       initialized_(false), remove_limit_thread_(NULL), limit_set_(false){}
+  MoveSlowAndClear::MoveSlowAndClear():global_costmap_(NULL), local_costmap_(NULL),
+                                       initialized_(false), clearing_distance_(0.5),
+                                       limited_distance_(0.3), limited_trans_speed_(0.25), limited_rot_speed_(0.45),
+                                       old_trans_speed_(0.55), old_rot_speed_(1.0),
+                                       remove_limit_thread_(NULL), limit_set_(false){}
 
   MoveSlowAndClear::~MoveSlowAndClear()
   {
