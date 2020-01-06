@@ -89,7 +89,8 @@ namespace dwa_local_planner {
       dp_->reconfigure(config);
   }
 
-  DWAPlannerROS::DWAPlannerROS() : initialized_(false),
+  DWAPlannerROS::DWAPlannerROS() : tf_(NULL), initialized_(false),
+      costmap_ros_(NULL), dsrv_(NULL),
       odom_helper_("odom"), setup_(false) {
 
   }
@@ -262,6 +263,11 @@ namespace dwa_local_planner {
 
 
   bool DWAPlannerROS::computeVelocityCommands(geometry_msgs::Twist& cmd_vel) {
+    if ( ! isInitialized()) {
+      ROS_ERROR("This planner has not been initialized, please call initialize() before using this planner");
+      return false;
+    }
+
     // dispatches to either dwa sampling control or stop and rotate control, depending on whether we have been close enough to goal
     if ( ! costmap_ros_->getRobotPose(current_pose_)) {
       ROS_ERROR("Could not get robot pose");
