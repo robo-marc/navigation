@@ -62,7 +62,8 @@ namespace costmap_2d
 class ObstacleLayer : public CostmapLayer
 {
 public:
-  ObstacleLayer()
+  ObstacleLayer() : footprint_clearing_enabled_(true), max_obstacle_height_(2),
+                    rolling_window_(false), dsrv_(NULL), combination_method_(1)
   {
     costmap_ = NULL;  // this is the unsigned char* member of parent class Costmap2D.
   }

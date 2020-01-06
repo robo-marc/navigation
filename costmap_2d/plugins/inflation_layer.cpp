@@ -52,19 +52,23 @@ namespace costmap_2d
 {
 
 InflationLayer::InflationLayer()
-  : inflation_radius_(0)
+  : resolution_(0.0)
+  , inflation_radius_(0)
+  , inscribed_radius_(0.1)
   , weight_(0)
   , inflate_unknown_(false)
   , cell_inflation_radius_(0)
   , cached_cell_inflation_radius_(0)
   , dsrv_(NULL)
   , seen_(NULL)
+  , seen_size_(0)
   , cached_costs_(NULL)
   , cached_distances_(NULL)
   , last_min_x_(-std::numeric_limits<float>::max())
   , last_min_y_(-std::numeric_limits<float>::max())
   , last_max_x_(std::numeric_limits<float>::max())
   , last_max_y_(std::numeric_limits<float>::max())
+  , need_reinflation_(false)
 {
   inflation_access_ = new boost::recursive_mutex();
 }
