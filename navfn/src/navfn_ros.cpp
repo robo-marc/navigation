@@ -45,8 +45,9 @@ PLUGINLIB_EXPORT_CLASS(navfn::NavfnROS, nav_core::BaseGlobalPlanner)
 
 namespace navfn {
 
-  NavfnROS::NavfnROS() 
-    : costmap_(NULL),  planner_(), initialized_(false), allow_unknown_(true) {}
+  NavfnROS::NavfnROS()
+    : costmap_(NULL),  planner_(), initialized_(false), allow_unknown_(true), visualize_potential_(false)
+    , planner_window_x_(0.0) , planner_window_y_(0.0), default_tolerance_(0.0) {}
 
   NavfnROS::NavfnROS(std::string name, costmap_2d::Costmap2DROS* costmap_ros)
     : costmap_(NULL),  planner_(), initialized_(false), allow_unknown_(true) {
