@@ -39,7 +39,7 @@
 #include <ros/console.h>
 
 namespace voxel_grid {
-  VoxelGrid::VoxelGrid(unsigned int size_x, unsigned int size_y, unsigned int size_z)
+  VoxelGrid::VoxelGrid(unsigned int size_x, unsigned int size_y, unsigned int size_z) : costmap(NULL)
   {
     size_x_ = size_x; 
     size_y_ = size_y; 
