@@ -265,6 +265,10 @@ pf_kdtree_node_t *pf_kdtree_insert_node(pf_kdtree_t *self, pf_kdtree_node_t *par
         }
       }
       assert(node->pivot_dim >= 0);
+      if (node->pivot_dim < 0)
+      {
+        return node;
+      }
 
       node->pivot_value = (key[node->pivot_dim] + node->key[node->pivot_dim]) / 2.0;
 
