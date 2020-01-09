@@ -28,6 +28,7 @@
 #include <errno.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -72,6 +73,23 @@ int map_load_occ(map_t *map, const char *filename, double scale, int negate)
   {
     fprintf(stderr, "Failed ot read image dimensions");
     return -1;
+  }
+
+  if (width < 0 || height < 0)
+  {
+    fprintf(stderr, "incorrect width or height values; width:%d height:%d\n", width, height);
+    fclose(file);
+    return -1;
+  }
+  else
+  {
+    //(width*height) Checking for overflow.
+    if (height != 0 && width > (SIZE_MAX / height))
+    {
+      fprintf(stderr, "width*height exceeds the upper limit; width:%d, height:%d\n", width, height);
+      fclose(file);
+      return -1;
+    }
   }
 
   // Allocate space in the map
