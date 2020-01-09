@@ -584,6 +584,13 @@ void pf_cluster_stats(pf_t *pf, pf_sample_set_t *set)
     //pf_matrix_fprintf(cluster->cov, stdout, "%e");
   }
 
+  assert(fabs(weight) >= DBL_EPSILON);
+  if (fabs(weight) < DBL_EPSILON)
+  {
+    printf("ERROR : divide-by-zero exception : weight is zero\n");
+    return;
+  }
+
   // Compute overall filter stats
   set->mean.v[0] = m[0] / weight;
   set->mean.v[1] = m[1] / weight;
