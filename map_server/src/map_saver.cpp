@@ -91,6 +91,11 @@ class MapGenerator
       ROS_INFO("Writing map occupancy data to %s", mapmetadatafile.c_str());
       FILE* yaml = fopen(mapmetadatafile.c_str(), "w");
 
+      if (!yaml)
+      {
+        ROS_ERROR("Couldn't save map file to %s", mapmetadatafile.c_str());
+        return;
+      }
 
       /*
 resolution: 0.100000
