@@ -40,7 +40,9 @@
 namespace global_planner {
 
 DijkstraExpansion::DijkstraExpansion(PotentialCalculator* p_calc, int nx, int ny) :
-        Expander(p_calc, nx, ny), pending_(NULL), precise_(false) {
+        Expander(p_calc, nx, ny), currentBuffer_(NULL), nextBuffer_(NULL), overBuffer_(NULL),
+        currentEnd_(0), nextEnd_(0), overEnd_(0),
+        pending_(NULL), precise_(false) {
     // priority buffers
     buffer1_ = new int[PRIORITYBUFSIZE];
     buffer2_ = new int[PRIORITYBUFSIZE];
