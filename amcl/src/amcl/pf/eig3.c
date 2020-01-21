@@ -3,6 +3,7 @@
    domain Java Matrix library JAMA. */
 
 #include <math.h>
+#include <assert.h>
 
 #ifndef MAX
 #define MAX(a, b) ((a)>(b)?(a):(b))
@@ -169,6 +170,10 @@ static void tql2(double V[n][n], double d[n], double e[n]) {
         break;
       }
       m++;
+    }
+    assert(m < n);
+    if( m >= n ){
+      return;
     }
 
     // If m == l, d[l] is an eigenvalue,
