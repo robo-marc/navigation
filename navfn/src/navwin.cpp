@@ -16,6 +16,7 @@ NavWin::NavWin(int w, int h, const char *name)
   im = NULL;
   pw = w;
   ph = h;
+  inc = 1;
   pce = pne = poe = 0;
   pc = pn = po = NULL;
   pathlen = pathbuflen = 0;
