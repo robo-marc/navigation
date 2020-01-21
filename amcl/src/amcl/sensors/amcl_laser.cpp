@@ -42,8 +42,17 @@ using namespace amcl;
 ////////////////////////////////////////////////////////////////////////////////
 // Default constructor
 AMCLLaser::AMCLLaser(size_t max_beams, map_t* map) : AMCLSensor(), 
+						     model_type(LASER_MODEL_BEAM),
+						     do_beamskip(false),
+						     beam_skip_distance(0.5),
+						     beam_skip_threshold(0.3),
+						     beam_skip_error_threshold(0.9),
 						     max_samples(0), max_obs(0), 
-						     temp_obs(NULL)
+						     temp_obs(NULL),
+						     z_hit(0.95), z_short(0.1), z_max(0.05), z_rand(0.05),
+						     sigma_hit(0.2),
+						     lambda_short(0.1),
+						     chi_outlier(0.0)
 {
   this->time = 0.0;
 

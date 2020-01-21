@@ -34,7 +34,7 @@ using namespace amcl;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Default constructor
-AMCLSensor::AMCLSensor()
+AMCLSensor::AMCLSensor() : is_action(false)
 {
   return;
 }

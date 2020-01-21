@@ -59,7 +59,9 @@ angle_diff(double a, double b)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Default constructor
-AMCLOdom::AMCLOdom() : AMCLSensor()
+AMCLOdom::AMCLOdom() : AMCLSensor(),
+model_type(ODOM_MODEL_DIFF),
+alpha1(0.2), alpha2(0.2), alpha3(0.2), alpha4(0.2), alpha5(0.2)
 {
   this->time = 0.0;
 }
