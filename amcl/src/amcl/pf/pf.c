@@ -55,6 +55,9 @@ pf_t *pf_alloc(int min_samples, int max_samples,
   srand48(time(NULL));
 
   pf = calloc(1, sizeof(pf_t));
+  assert(pf);
+  if (pf == NULL)
+    return pf;
 
   pf->random_pose_fn = random_pose_fn;
   pf->random_pose_data = random_pose_data;
@@ -78,6 +81,9 @@ pf_t *pf_alloc(int min_samples, int max_samples,
       
     set->sample_count = max_samples;
     set->samples = calloc(max_samples, sizeof(pf_sample_t));
+    assert(set->samples);
+    if (set->samples == NULL)
+      return pf;
 
     for (i = 0; i < set->sample_count; i++)
     {
@@ -143,6 +149,9 @@ void pf_init(pf_t *pf, pf_vector_t mean, pf_matrix_t cov)
   set->sample_count = pf->max_samples;
 
   pdf = pf_pdf_gaussian_alloc(mean, cov);
+  assert(pdf);
+  if (pdf == NULL)
+    return;
     
   // Compute the new sample poses
   for (i = 0; i < set->sample_count; i++)
@@ -331,6 +340,10 @@ void pf_update_resample(pf_t *pf)
   // TODO: Replace this with a more efficient procedure
   // (e.g., http://www.network-theory.co.uk/docs/gslref/GeneralDiscreteDistributions.html)
   c = (double*)malloc(sizeof(double)*(set_a->sample_count+1));
+  assert(c);
+  if (c == NULL)
+    return;
+
   c[0] = 0.0;
   for(i=0;i<set_a->sample_count;i++)
     c[i+1] = c[i]+set_a->samples[i].weight;
