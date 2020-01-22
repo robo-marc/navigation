@@ -199,6 +199,8 @@ int main(int argc, char **argv)
     }
   }
 
+  free(cmap);
+
   return 0;
 }
 
