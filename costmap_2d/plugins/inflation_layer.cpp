@@ -161,6 +161,7 @@ void InflationLayer::updateBounds(double robot_x, double robot_y, double robot_y
 
 void InflationLayer::onFootprintChanged()
 {
+  boost::unique_lock < boost::recursive_mutex > lock(*inflation_access_);
   inscribed_radius_ = layered_costmap_->getInscribedRadius();
   cell_inflation_radius_ = cellDistance(inflation_radius_);
   computeCaches();
@@ -347,8 +348,7 @@ void InflationLayer::deleteKernels()
       if (cached_distances_[i])
         delete[] cached_distances_[i];
     }
-    if (cached_distances_)
-      delete[] cached_distances_;
+    delete[] cached_distances_;
     cached_distances_ = NULL;
   }
 
