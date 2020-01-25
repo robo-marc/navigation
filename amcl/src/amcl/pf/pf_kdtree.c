@@ -68,6 +68,9 @@ pf_kdtree_t *pf_kdtree_alloc(int max_size)
   pf_kdtree_t *self;
 
   self = calloc(1, sizeof(pf_kdtree_t));
+  assert(self);
+  if (self == NULL)
+    return self;
 
   self->size[0] = 0.50;
   self->size[1] = 0.50;
@@ -265,6 +268,10 @@ pf_kdtree_node_t *pf_kdtree_insert_node(pf_kdtree_t *self, pf_kdtree_node_t *par
         }
       }
       assert(node->pivot_dim >= 0);
+      if (node->pivot_dim < 0)
+      {
+        return node;
+      }
 
       node->pivot_value = (key[node->pivot_dim] + node->key[node->pivot_dim]) / 2.0;
 
@@ -363,6 +370,9 @@ void pf_kdtree_cluster(pf_kdtree_t *self)
 
   queue_count = 0;
   queue = calloc(self->node_count, sizeof(queue[0]));
+  assert(queue);
+  if (queue == NULL)
+    return;
 
   // Put all the leaves in a queue
   for (i = 0; i < self->node_count; i++)

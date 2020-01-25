@@ -113,6 +113,7 @@ namespace navfn {
     costarr = NULL;
     potarr = NULL;
     pending = NULL;
+    nobs = 0;
     gradx = grady = NULL;
     setNavArr(xs,ys);
 
@@ -121,6 +122,16 @@ namespace navfn {
     pb2 = new int[PRIORITYBUFSIZE];
     pb3 = new int[PRIORITYBUFSIZE];
 
+    curP = pb1;
+    nextP = pb2;
+    overP = pb3;
+
+    curPe = 0;
+    nextPe = 0;
+    overPe = 0;
+
+    curT = COST_OBS;
+
     // for Dijkstra (breadth-first), set to COST_NEUTRAL
     // for A* (best-first), set to COST_NEUTRAL
     priInc = 2*COST_NEUTRAL;	
@@ -128,6 +139,8 @@ namespace navfn {
     // goal and start
     goal[0] = goal[1] = 0;
     start[0] = start[1] = 0;
+
+    last_path_cost_ = POT_HIGH;
 
     // display function
     displayFn = NULL;

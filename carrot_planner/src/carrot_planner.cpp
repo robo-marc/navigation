@@ -46,7 +46,7 @@ PLUGINLIB_EXPORT_CLASS(carrot_planner::CarrotPlanner, nav_core::BaseGlobalPlanne
 namespace carrot_planner {
 
   CarrotPlanner::CarrotPlanner()
-  : costmap_ros_(NULL), initialized_(false){}
+  : costmap_ros_(NULL), step_size_(0.0), min_dist_from_robot_(0.10), costmap_(NULL), world_model_(NULL), initialized_(false){}
 
   CarrotPlanner::CarrotPlanner(std::string name, costmap_2d::Costmap2DROS* costmap_ros)
   : costmap_ros_(NULL), initialized_(false){

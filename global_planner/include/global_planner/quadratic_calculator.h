@@ -45,6 +45,7 @@ namespace global_planner {
 class QuadraticCalculator : public PotentialCalculator {
     public:
         QuadraticCalculator(int nx, int ny): PotentialCalculator(nx,ny) {}
+        virtual ~QuadraticCalculator() {}
 
         float calculatePotential(float* potential, unsigned char cost, int n, float prev_potential);
 };

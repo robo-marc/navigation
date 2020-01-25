@@ -71,6 +71,7 @@ int map_load_occ(map_t *map, const char *filename, double scale, int negate)
   if(fscanf(file, " %d %d \n %d \n", &width, &height, &depth) != 3)
   {
     fprintf(stderr, "Failed ot read image dimensions");
+    fclose(file);
     return -1;
   }
 
@@ -81,12 +82,20 @@ int map_load_occ(map_t *map, const char *filename, double scale, int negate)
     map->size_x = width;
     map->size_y = height;
     map->cells = calloc(width * height, sizeof(map->cells[0]));
+    assert(map->cells);
+    if (map->cells == NULL)
+    {
+      fprintf(stderr, "Failed at memory allocate");
+      fclose(file);
+      return -1;
+    }
   }
   else
   {
     if (width != map->size_x || height != map->size_y)
     {
       //PLAYER_ERROR("map dimensions are inconsistent with prior map dimensions");
+      fclose(file);
       return -1;
     }
   }

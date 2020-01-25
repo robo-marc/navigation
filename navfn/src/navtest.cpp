@@ -199,6 +199,8 @@ int main(int argc, char **argv)
     }
   }
 
+  free(cmap);
+
   return 0;
 }
 
@@ -302,5 +304,6 @@ readPGM(const char *fname, int *width, int *height, bool raw)
   pgm_freerow(row);
   *width = ncols;
   *height = nrows;
+  fclose(pgmfile);
   return cmap;
 }

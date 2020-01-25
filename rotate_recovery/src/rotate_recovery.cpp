@@ -51,7 +51,10 @@ PLUGINLIB_EXPORT_CLASS(rotate_recovery::RotateRecovery, nav_core::RecoveryBehavi
 
 namespace rotate_recovery
 {
-RotateRecovery::RotateRecovery(): local_costmap_(NULL), initialized_(false), world_model_(NULL)
+RotateRecovery::RotateRecovery(): local_costmap_(NULL), initialized_(false)
+                                , sim_granularity_(0.017), min_rotational_vel_(0.4), max_rotational_vel_(1.0)
+                                , acc_lim_th_(3.2), tolerance_(0.10), frequency_(20.0)
+                                , world_model_(NULL)
 {
 }
 

@@ -46,7 +46,11 @@ typedef enum
 class AMCLLaserData : public AMCLSensorData
 {
   public:
-    AMCLLaserData () {ranges=NULL;};
+    AMCLLaserData () :
+    range_count(0), range_max(-1.0)
+    {
+      ranges=NULL;
+    };
     virtual ~AMCLLaserData() {delete [] ranges;};
   // Laser range data (range, bearing tuples)
   public: int range_count;

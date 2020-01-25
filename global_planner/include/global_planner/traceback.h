@@ -46,6 +46,7 @@ class Traceback {
     public:
         Traceback(PotentialCalculator* p_calc) : xs_(0), ys_(0),
                                                  lethal_cost_(253), p_calc_(p_calc) {}
+        virtual ~Traceback() {}
 
         virtual bool getPath(float* potential, double start_x, double start_y, double end_x, double end_y, std::vector<std::pair<float, float> >& path) = 0;
         virtual void setSize(int xs, int ys) {
