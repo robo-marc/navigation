@@ -62,7 +62,9 @@ class VoxelLayer : public ObstacleLayer
 {
 public:
   VoxelLayer() :
-      voxel_grid_(0, 0, 0)
+      voxel_dsrv_(NULL), publish_voxel_(false), voxel_grid_(0, 0, 0),
+      z_resolution_(0.2), origin_z_(0),
+      unknown_threshold_(21), mark_threshold_(0), size_z_(10)
   {
     costmap_ = NULL;  // this is the unsigned char* member of parent class's parent class Costmap2D.
   }

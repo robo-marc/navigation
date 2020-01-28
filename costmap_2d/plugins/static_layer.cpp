@@ -51,7 +51,12 @@ using costmap_2d::FREE_SPACE;
 namespace costmap_2d
 {
 
-StaticLayer::StaticLayer() : dsrv_(NULL) {}
+StaticLayer::StaticLayer() : subscribe_to_updates_(false), map_received_(false), has_updated_data_(false)
+                           , x_(0), y_(0), width_(size_x_), height_(size_y_)
+                           , track_unknown_space_(true), use_maximum_(false)
+                           , first_map_only_(false), trinary_costmap_(true)
+                           , lethal_threshold_(100), unknown_cost_value_(-1)
+                           , dsrv_(NULL) {}
 
 StaticLayer::~StaticLayer()
 {
