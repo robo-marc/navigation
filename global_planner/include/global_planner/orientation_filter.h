@@ -44,7 +44,7 @@ enum OrientationMode { NONE, FORWARD, INTERPOLATE, FORWARDTHENINTERPOLATE, BACKW
 
 class OrientationFilter {
     public:
-        OrientationFilter() : omode_(NONE) {}
+        OrientationFilter() : omode_(NONE), window_size_(1) {}
         virtual ~OrientationFilter() {}
     
         virtual void processPath(const geometry_msgs::PoseStamped& start,

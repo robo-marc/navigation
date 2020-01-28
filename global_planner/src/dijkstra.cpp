@@ -48,6 +48,8 @@ DijkstraExpansion::DijkstraExpansion(PotentialCalculator* p_calc, int nx, int ny
     buffer2_ = new int[PRIORITYBUFSIZE];
     buffer3_ = new int[PRIORITYBUFSIZE];
 
+    threshold_ = lethal_cost_;
+
     priorityIncrement_ = 2 * neutral_cost_;
 }
 
