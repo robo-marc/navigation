@@ -459,16 +459,16 @@ namespace move_base {
   }
 
   bool MoveBase::makePlan(const geometry_msgs::PoseStamped& goal, std::vector<geometry_msgs::PoseStamped>& plan){
-    boost::unique_lock<costmap_2d::Costmap2D::mutex_t> lock(*(planner_costmap_ros_->getCostmap()->getMutex()));
-
-    //make sure to set the plan to be empty initially
-    plan.clear();
-
     //since this gets called on handle activate
     if(planner_costmap_ros_ == NULL) {
       ROS_ERROR("Planner costmap ROS is NULL, unable to create global plan");
       return false;
     }
+
+    boost::unique_lock<costmap_2d::Costmap2D::mutex_t> lock(*(planner_costmap_ros_->getCostmap()->getMutex()));
+
+    //make sure to set the plan to be empty initially
+    plan.clear();
 
     //get the starting pose of the robot
     geometry_msgs::PoseStamped global_pose;
@@ -681,7 +681,13 @@ namespace move_base {
       if(as_->isPreemptRequested()){
         if(as_->isNewGoalAvailable()){
           //if we're active and a new goal is available, we'll accept it, but we won't shut anything down
-          move_base_msgs::MoveBaseGoal new_goal = *as_->acceptNewGoal();
+          boost::shared_ptr<const move_base_msgs::MoveBaseGoal_<std::allocator<void> > > new_goalPtr = as_->acceptNewGoal();
+          if (new_goalPtr == NULL)
+          {
+            as_->setAborted(move_base_msgs::MoveBaseResult(), "Aborting on goal because it was an invalid NewGoal");
+            return;
+          }
+          move_base_msgs::MoveBaseGoal new_goal = *new_goalPtr;
 
           if(!isQuaternionValid(new_goal.target_pose.pose.orientation)){
             as_->setAborted(move_base_msgs::MoveBaseResult(), "Aborting on goal because it was sent with an invalid quaternion");
