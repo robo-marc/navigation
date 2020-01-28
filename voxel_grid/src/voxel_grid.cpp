@@ -202,7 +202,7 @@ namespace voxel_grid {
       printf("Layer z = %u:\n",z);
       for(unsigned int y = 0; y < size_y_; y++){
         for(unsigned int x = 0 ; x < size_x_; x++){
-          printf((getVoxel(x, y, z)) == voxel_grid::MARKED? "#" : " ");
+          printf("%c", (getVoxel(x, y, z) == voxel_grid::MARKED)? '#' : ' ');
         }
         printf("|\n");
       } 
@@ -213,7 +213,7 @@ namespace voxel_grid {
     printf("Column view:\n");
     for(unsigned int y = 0; y < size_y_; y++){
       for(unsigned int x = 0 ; x < size_x_; x++){
-        printf((getVoxelColumn(x, y, 16, 0) == voxel_grid::MARKED)? "#" : " ");
+        printf("%c", (getVoxelColumn(x, y, 16, 0) == voxel_grid::MARKED)? '#' : ' ');
       }
       printf("|\n");
     } 
