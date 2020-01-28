@@ -258,6 +258,12 @@ readPGM(const char *fname, int *width, int *height, bool raw)
 
   // set up cost map
   COSTTYPE *cmap = (COSTTYPE *)malloc(ncols*nrows*sizeof(COSTTYPE));
+  if (cmap == NULL)
+    {
+      printf("[NavTest] Failed at memory allocate : COSTTYPE\n");
+      fclose(pgmfile);
+      return NULL;
+    }
   if (!raw)
     for (int i=0; i<ncols*nrows; i++)
       cmap[i] = COST_NEUTRAL;
