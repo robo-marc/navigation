@@ -251,7 +251,8 @@ private:
   void movementCB(const ros::TimerEvent &event);
   void mapUpdateLoop(double frequency);
   bool map_update_thread_shutdown_;
-  bool stop_updates_, initialized_, stopped_, robot_stopped_;
+  bool stop_updates_, stopped_, robot_stopped_;
+  volatile bool initialized_;
   boost::thread* map_update_thread_;  ///< @brief A thread for updating the map
   ros::Timer timer_;
   ros::Time last_publish_;
