@@ -635,6 +635,13 @@ void pf_get_cep_stats(pf_t *pf, pf_vector_t *mean, double *var)
     mrr += sample->weight * sample->pose.v[1] * sample->pose.v[1];
   }
 
+  assert(fabs(mn) >= DBL_EPSILON);
+  if (fabs(mn) < DBL_EPSILON)
+  {
+    printf("ERROR : divide-by-zero exception : mn is zero\n");
+    return;
+  }
+
   mean->v[0] = mx / mn;
   mean->v[1] = my / mn;
   mean->v[2] = 0.0;
