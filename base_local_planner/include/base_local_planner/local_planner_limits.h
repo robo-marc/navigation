@@ -63,7 +63,25 @@ public:
   double theta_stopped_vel;
   bool   restore_defaults;
 
-  LocalPlannerLimits() {}
+  LocalPlannerLimits():
+        max_vel_trans(0.55),
+        min_vel_trans(0.1),
+        max_vel_x(0.55),
+        min_vel_x(0.0),
+        max_vel_y(0.1),
+        min_vel_y(-0.1),
+        max_vel_theta(1.0),
+        min_vel_theta(0.4),
+        acc_lim_x(2.5),
+        acc_lim_y(2.5),
+        acc_lim_theta(3.2),
+        acc_lim_trans(0.0),
+        prune_plan(true),
+        xy_goal_tolerance(0.10),
+        yaw_goal_tolerance(0.05),
+        trans_stopped_vel(0.1),
+        theta_stopped_vel(0.1),
+        restore_defaults(false) {}
 
   LocalPlannerLimits(
       double nmax_vel_trans,

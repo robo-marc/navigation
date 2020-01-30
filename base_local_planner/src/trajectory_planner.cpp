@@ -168,7 +168,8 @@ namespace base_local_planner{
     max_vel_x_(max_vel_x), min_vel_x_(min_vel_x),
     max_vel_th_(max_vel_th), min_vel_th_(min_vel_th), min_in_place_vel_th_(min_in_place_vel_th),
     backup_vel_(backup_vel),
-    dwa_(dwa), heading_scoring_(heading_scoring), heading_scoring_timestep_(heading_scoring_timestep),
+    dwa_(dwa), heading_scoring_(heading_scoring), heading_scoring_timestep_(heading_scoring_timestep), meter_scoring_(meter_scoring),
+    goal_x_(0.0), goal_y_(0.0), final_goal_x_(0.0), final_goal_y_(0.0),
     simple_attractor_(simple_attractor), y_vels_(y_vels), stop_time_buffer_(stop_time_buffer), sim_period_(sim_period)
   {
     //the robot is not stuck to begin with

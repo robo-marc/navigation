@@ -61,8 +61,9 @@ namespace base_local_planner {
 class SimpleTrajectoryGenerator: public base_local_planner::TrajectorySampleGenerator {
 public:
 
-  SimpleTrajectoryGenerator() {
-    limits_ = NULL;
+  SimpleTrajectoryGenerator(): next_sample_index_(0), limits_(NULL), continued_acceleration_(true)
+  , discretize_by_time_(false), sim_time_(1.7), sim_granularity_(0.025),angular_sim_granularity_(0.025)
+  , use_dwa_(false), sim_period_(0.05) {
   }
 
   ~SimpleTrajectoryGenerator() {}

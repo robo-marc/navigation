@@ -41,7 +41,9 @@
 
 namespace base_local_planner {
 
-OscillationCostFunction::OscillationCostFunction() {
+OscillationCostFunction::OscillationCostFunction()
+  :oscillation_reset_dist_(0.05), oscillation_reset_angle_(0.2) {
+  resetOscillationFlags();
 }
 
 OscillationCostFunction::~OscillationCostFunction() {

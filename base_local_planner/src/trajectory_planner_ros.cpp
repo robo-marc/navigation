@@ -73,7 +73,13 @@ namespace base_local_planner {
   }
 
   TrajectoryPlannerROS::TrajectoryPlannerROS() :
-      world_model_(NULL), tc_(NULL), costmap_ros_(NULL), tf_(NULL), setup_(false), initialized_(false), odom_helper_("odom") {}
+      world_model_(NULL), tc_(NULL), costmap_ros_(NULL), costmap_(NULL),
+      tf_(NULL), max_sensor_range_(2.0), rot_stopped_velocity_(1e-2), trans_stopped_velocity_(1e-2),
+      xy_goal_tolerance_(0.10), yaw_goal_tolerance_(0.05), min_in_place_vel_th_(0.4), prune_plan_(true),
+      max_vel_th_(1.0), min_vel_th_(-1.0), acc_lim_x_(2.5), acc_lim_y_(2.5), acc_lim_theta_(3.2),
+      sim_period_(0.05), rotating_to_goal_(false), reached_goal_(false),
+      latch_xy_goal_tolerance_(false), xy_tolerance_latch_(false),
+      dsrv_(NULL), setup_(false), initialized_(false), odom_helper_("odom") {}
 
   TrajectoryPlannerROS::TrajectoryPlannerROS(std::string name, tf2_ros::Buffer* tf, costmap_2d::Costmap2DROS* costmap_ros) :
       world_model_(NULL), tc_(NULL), costmap_ros_(NULL), tf_(NULL), setup_(false), initialized_(false), odom_helper_("odom") {
@@ -167,7 +173,7 @@ namespace base_local_planner {
       private_nh.param("goal_distance_bias", gdist_scale, 0.8);
       private_nh.param("occdist_scale", occdist_scale, 0.01);
 
-      bool meter_scoring;
+      bool meter_scoring = false;
       if ( ! private_nh.hasParam("meter_scoring")) {
         ROS_WARN("Trajectory Rollout planner initialized with param meter_scoring not set. Set it to true to make your settings robust against changes of costmap resolution.");
       } else {

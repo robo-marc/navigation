@@ -42,8 +42,9 @@
 
 namespace base_local_planner {
 
-ObstacleCostFunction::ObstacleCostFunction(costmap_2d::Costmap2D* costmap) 
-    : costmap_(costmap), sum_scores_(false) {
+ObstacleCostFunction::ObstacleCostFunction(costmap_2d::Costmap2D* costmap)
+    : costmap_(costmap), world_model_(NULL), max_trans_vel_(0.55)
+    , sum_scores_(false), max_scaling_factor_(0.2), scaling_speed_(0.25) {
   if (costmap != NULL) {
     world_model_ = new base_local_planner::CostmapModel(*costmap_);
   }

@@ -38,17 +38,19 @@ using namespace std;
 namespace base_local_planner{
 
   MapGrid::MapGrid()
-    : size_x_(0), size_y_(0)
+    : goal_x_(0.0), goal_y_(0.0), size_x_(0), size_y_(0)
   {
   }
 
   MapGrid::MapGrid(unsigned int size_x, unsigned int size_y) 
-    : size_x_(size_x), size_y_(size_y)
+    : goal_x_(0.0), goal_y_(0.0), size_x_(size_x), size_y_(size_y)
   {
     commonInit();
   }
 
-  MapGrid::MapGrid(const MapGrid& mg){
+  MapGrid::MapGrid(const MapGrid& mg)
+    : goal_x_(0.0), goal_y_(0.0)
+  {
     size_y_ = mg.size_y_;
     size_x_ = mg.size_x_;
     map_ = mg.map_;

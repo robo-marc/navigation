@@ -81,7 +81,8 @@ public:
    */
   void reconfigureCB(LocalPlannerLimits &config, bool restore_defaults);
 
-  LocalPlannerUtil() : initialized_(false) {}
+  LocalPlannerUtil() : costmap_(NULL), tf_(NULL),
+                       setup_(false), initialized_(false) {}
 
   ~LocalPlannerUtil() {
   }

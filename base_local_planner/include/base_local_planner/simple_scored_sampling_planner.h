@@ -60,7 +60,7 @@ public:
 
   ~SimpleScoredSamplingPlanner() {}
 
-  SimpleScoredSamplingPlanner() {}
+  SimpleScoredSamplingPlanner() : max_samples_(-1) {}
 
   /**
    * Takes a list of generators and critics. Critics return costs > 0, or negative costs for invalid trajectories.
