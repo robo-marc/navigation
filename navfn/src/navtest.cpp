@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <limits.h>
 
 #include <string>
 #include <fstream>
@@ -132,6 +133,19 @@ int main(int argc, char **argv)
     {
       sx = (int)((.001 + size) / (res*.001));
       sy = sx;
+      if((sx < 0) || (sy < 0))
+        {
+          printf("[NavFn] Size setting is abnormal(sx,res,size): (%d,%d,%lf)\n", sx, res, size);
+          return 1;
+        }
+      else
+        {
+          if((sy != 0) && (sx > std::numeric_limits<size_t>::max() / sy))
+            {
+              printf("[NavFn] Size setting is abnormal(sx,res,size): (%d,%d,%lf)\n", sx, res, size);
+              return 1;
+            }
+        }
       nav = new NavFn(sx,sy); // size in pixels
       goal[0] = sx-10;
       goal[1] = sy/2;
