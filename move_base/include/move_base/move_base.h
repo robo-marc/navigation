@@ -215,7 +215,7 @@ namespace move_base {
       std::vector<geometry_msgs::PoseStamped>* controller_plan_;
 
       //set up the planner's thread
-      bool runPlanner_;
+      volatile bool runPlanner_;
       boost::recursive_mutex planner_mutex_;
       boost::condition_variable_any planner_cond_;
       geometry_msgs::PoseStamped planner_goal_;
